@@ -70,7 +70,7 @@
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <h2>
-                    I tuoi occhi possono ingannarti: non fidarti di loro.
+                    ...i tuoi occhi possono ingannarti: non fidarti di loro!
                 </h2>
             </div>
         </div>
@@ -105,8 +105,11 @@
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fas fa-4x fa-church text-primary mb-3 sr-icon-1"></i>
-                    <h3 class="mb-3">Chiesa di Acquate</h3>
-                    <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+                    <h3 class="mb-3">Ci Sposiamo!</h3>
+                    <p class="text-muted mb-0">Sabato 18 Maggio 2019</p>
+                    <p class="text-muted mb-0">ore 11</p>
+                    <p class="text-muted mb-0">Chiesa di S. Giorgio Martire</p>
+                    <p class="text-muted mb-0">Acquate - Lecco</p>
                     <br/>
                     <br/>
 
@@ -132,8 +135,9 @@
             <div class="col-lg-3 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fas fa-4x fa-utensils text-primary mb-3 sr-icon-1"></i>
-                    <h3 class="mb-3">Oasi di Galbusera Bianca</h3>
-                    <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+                    <h3 class="mb-3">Si festegger&agrave!</h3>
+                    <p class="text-muted mb-0">Oasi di Galbusera Bianca</p>
+                    <p class="text-muted mb-0">Valletta Brianza (ex Rovagnate), LC</p>
                     <br/>
                     <br/>
                 </div>
@@ -162,7 +166,46 @@
                 <hr class="my-4">
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 text-center">
+                <div class="service-box mt-5 mx-auto">
+                    <i class="fas fa-4x fa-plane text-primary mb-3 sr-icon-1"></i>
+                    <p class="text-muted mb-0">Dopo il matrimonio, partiremo per un viaggio "on the road" negli USA, che partirà da San Francisco,
+                        toccherà i principali parchi di California, Arizona e Utah, e si concluderà a Los Angeles.</p>
+                    <p class="text-muted mb-0">Se volete aiutarci a partire (e a tornare) potete offrire il vostro contributo alle coordinate
+                        bancarie che trovate cliccando <a href="#bankModal" data-toggle="modal" data-target="#bankModal">qui</a>, o se preferite, utilizzando Satispay.</p>
+
+                    <br/>
+                    <br/>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 text-center embed-responsive embed-responsive-16by9">
+                <iframe src="https://www.google.com/maps/d/embed?mid=1kQgs0JvjZOY8vbXDm1BCZ6i5zdIvkEA7"
+                        class="embed-responsive-item"></iframe>
+            </div>
+        </div>
     </div>
+
+    <div class="modal fade" id="bankModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Coordinate Bancarie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="iban">IBAN: </p>
+                    <p class="beneficiaries">Intestato a: </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <section id="rsvp">
@@ -189,6 +232,13 @@
         </div>
     </div>
 </section>
+
+
+<footer class="footer">
+    <div class="container text-center">
+        <span class="text-muted">© Giuseppe Villa blablabla</span>
+    </div>
+</footer>
 
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -225,6 +275,27 @@
         var center_oasi = map_oasi.getCenter();
         google.maps.event.trigger(map_oasi, "resize");
         map_oasi.setCenter(center_oasi);
+    });
+</script>
+
+<script>
+    $('#bankModal').on('show.bs.modal', function (e) {
+        //var modal = $(this);
+        //$(this).find('.modal-content')
+        console.info("here")
+        $.ajax({
+            type: "GET",
+            url: "https://rtr69l0ps7.execute-api.eu-west-1.amazonaws.com/test/get",
+            crossDomain: true,
+            contentType: 'application/json',
+            dataType: 'json'
+        }).then(function(data) {
+            console.info(data);
+            $('.iban').append(data.iban)
+            var beneficiaries = data.beneficiaries[0].name + ' ' + data.beneficiaries[0].surname + ', ' + data.beneficiaries[1].name + ' ' + data.beneficiaries[1].surname
+            $('.beneficiaries').append(beneficiaries)
+        });
+
     });
 </script>
 
