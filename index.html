@@ -170,10 +170,13 @@
             <div class="col-lg-6 col-md-6 text-center">
                 <div class="service-box mt-5 mx-auto">
                     <i class="fas fa-4x fa-plane text-primary mb-3 sr-icon-1"></i>
-                    <p class="text-muted mb-0">Dopo il matrimonio, partiremo per un viaggio "on the road" negli USA, che partirà da San Francisco,
+                    <p class="text-muted mb-0">Dopo il matrimonio, partiremo per un viaggio "on the road" negli USA, che
+                        partirà da San Francisco,
                         toccherà i principali parchi di California, Arizona e Utah, e si concluderà a Los Angeles.</p>
-                    <p class="text-muted mb-0">Se volete aiutarci a partire (e a tornare) potete offrire il vostro contributo alle coordinate
-                        bancarie che trovate cliccando <a href="#bankModal" data-toggle="modal" data-target="#bankModal">qui</a>, o se preferite, utilizzando Satispay.</p>
+                    <p class="text-muted mb-0">Se volete aiutarci a partire (e a tornare) potete offrire il vostro
+                        contributo alle coordinate
+                        bancarie che trovate cliccando <a href="#bankModal" data-toggle="modal"
+                                                          data-target="#bankModal">qui</a>.</p>
 
                     <br/>
                     <br/>
@@ -214,21 +217,73 @@
             <div class="col-lg-8 mx-auto text-center">
                 <h2 class="section-heading">RSVP</h2>
                 <hr class="my-4">
-                <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an
-                    email and we will get back to you as soon as possible!</p>
+                <p class="text-muted mb-0"><i>Répondez s'il vous plaît!</i></p>
+                <p class="text-muted mb-0">Diteci qui sotto se sarete presenti o meno. Questa &egrave; anche l'occasione
+                    giusta per informarci su eventuali intolleranze!</p>
+                <br>
+                <form>
+                    <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label text-muted">Nome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" placeholder="Inserisci il tuo nome"
+                                   required
+                                   oninvalid="this.setCustomValidity('Inserisci il tuo nome!')"
+                                   oninput="setCustomValidity('')">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputSurname" class="col-sm-2 col-form-label text-muted">Cognome</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputSurname"
+                                   placeholder="Inserisci il tuo cognome" required
+                                   oninvalid="this.setCustomValidity('Inserisci il tuo nome!')"
+                                   oninput="setCustomValidity('')">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <legend class="col-form-label col-sm-2 pt-0 text-muted">Sarò presente?</legend>
+                        <div class="form-check col-sm-2">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="si"
+                                   checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                Si
+                            </label>
+                        </div>
+                        <div class="form-check col-sm-2">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="no">
+                            <label class="form-check-label" for="gridRadios2">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputSurname" class="col-sm-2 col-form-label text-muted">Numero partecipanti</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                                <option selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputSurname" class="col-sm-2 col-form-label text-muted">Note</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="inputNotes" rows="5" placeholder="Inserisci informazioni su intolleranze, allergie o preferenze"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Conferma</button>
+                </form>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 ml-auto text-center">
-                <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
-                <p>123-456-6789</p>
-            </div>
-            <div class="col-lg-4 mr-auto text-center">
-                <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
-                <p>
-                    <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
-                </p>
-            </div>
+
         </div>
     </div>
 </section>
@@ -251,6 +306,7 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/creative.min.js"></script>
+<script src="js/get_coordinates.js"></script>
 
 <script>
     var map_chiesa;
@@ -275,27 +331,6 @@
         var center_oasi = map_oasi.getCenter();
         google.maps.event.trigger(map_oasi, "resize");
         map_oasi.setCenter(center_oasi);
-    });
-</script>
-
-<script>
-    $('#bankModal').on('show.bs.modal', function (e) {
-        //var modal = $(this);
-        //$(this).find('.modal-content')
-        console.info("here")
-        $.ajax({
-            type: "GET",
-            url: "https://rtr69l0ps7.execute-api.eu-west-1.amazonaws.com/test/get",
-            crossDomain: true,
-            contentType: 'application/json',
-            dataType: 'json'
-        }).then(function(data) {
-            console.info(data);
-            $('.iban').append(data.iban)
-            var beneficiaries = data.beneficiaries[0].name + ' ' + data.beneficiaries[0].surname + ', ' + data.beneficiaries[1].name + ' ' + data.beneficiaries[1].surname
-            $('.beneficiaries').append(beneficiaries)
-        });
-
     });
 </script>
 
