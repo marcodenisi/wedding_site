@@ -25,5 +25,6 @@ $("#rsvp_form").submit(function (event) {
         })
     }).then(function (data) {
         console.info(data);
+        $('#rsvpAlert').addClass('show');
     });
 });
